@@ -20,10 +20,13 @@ export function newProject(state,mode='quick') {
  return {id:uid(),schemaVersion:1,title:'Новый объект',mode,status:'Замер',client:'',phone:'',address:'',area:null,note:'',date:new Date().toISOString().slice(0,10),height:2700,supply:1,uLN:220,uLL:380,inputA:null,complexity:1,markup:0,discount:0,includeMaterials:true,mainLevel:'floor',reserve:5,revision:0,prices:clone(state.prices),materials:clone(state.catalogs.materials),executor:clone(state.settings),quick:{},overrides:{},extra:[],walls:[],rooms:[],openings:[],points:[],loads:[],circuits:[],routes:[],cables:[],conduits:[],mounts:[],chases:[],devices:[],panel:{rows:[12,12],reservePct:20},versions:[],createdAt:new Date().toISOString()};
 }
 export function duplicateProject(p){
- const result=clone(p), map=new Map();
- function collect(x){if(x&&typeof x==='object'){if(x.id)map.set(x.id,uid());Object.values(x).forEach(collect);}}
- collect({...result,versions:[]});
+ const result=clone(p), map=new Map([[p.id,uid()]]);
+ // Work codes and catalog SKUs are stable shared identities. Only project-owned
+ // entities get new IDs; quick/override keys continue to refer to work codes.
+ for(const key of ['walls','rooms','openings','points','loads','circuits','routes','cables','conduits','mounts','chases','devices'])
+  for(const entity of result[key]) map.set(entity.id,uid());
  function remap(x){if(typeof x==='string')return map.get(x)||x;if(Array.isArray(x))return x.map(remap);if(x&&typeof x==='object')return Object.fromEntries(Object.entries(x).map(([k,v])=>[k,remap(v)]));return x;}
+
  const copy=remap(result);copy.versions=[];copy.title+=' (копия)';copy.archived=false;copy.revision=0;return copy;
 }
 export function demo(state){

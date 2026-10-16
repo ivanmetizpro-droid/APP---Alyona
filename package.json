@@ -1,6 +1,6 @@
 {
   "name": "elektrosmeta",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Среда разработки приложения электрика по согласованному ТЗ",
   "type": "module",
@@ -18,7 +18,9 @@
     "test": "node --test tests/unit/*.test.mjs",
     "test:e2e": "playwright test",
     "check": "npm run doctor && npm run lint && npm test",
-    "test:all": "npm run check && npm run test:e2e"
+    "test:all": "npm run check && npm run test:e2e",
+    "offline": "node scripts/prepare-offline.mjs",
+    "android": "bash scripts/build-android.sh"
   },
   "repository": {
     "type": "git",

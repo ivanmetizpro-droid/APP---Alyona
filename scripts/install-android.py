@@ -5,7 +5,7 @@ root=pathlib.Path('/workspace/toolchains'); sdk=root/'android-sdk';root.mkdir(ex
 repo=root/'android-repository.xml'
 subprocess.run(['curl','-fL','--retry','2','https://dl.google.com/android/repository/repository2-1.xml','-o',str(repo)],check=True)
 xml=ET.parse(repo).getroot()
-for package,filename,dest in [('platforms;android-34','platform-34-ext7_r03.zip','platforms/android-34'),('build-tools;34.0.0','build-tools_r34-linux.zip','build-tools/34.0.0'),('platform-tools','platform-tools_r37.0.1-linux.zip','platform-tools')]:
+for package,filename,dest in [('platforms;android-34','platform-34-ext7_r03.zip','platforms/android-34'),('build-tools;35.0.0','build-tools_r35_linux.zip','build-tools/35.0.0'),('platform-tools','platform-tools_r37.0.1-linux.zip','platform-tools')]:
  archive=None
  for p in xml.findall('remotePackage'):
   if p.attrib['path']==package:

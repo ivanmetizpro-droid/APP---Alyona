@@ -16,4 +16,4 @@ const required = [
 for (const item of required) await access(path.join(root, item));
 const spec = await readFile(path.join(root, 'docs/TZ_Elektrosmeta_HTML_CSS_JavaScript_Codex.md'), 'utf8');
 if (!spec.includes('C24') || !spec.includes('A25')) throw new Error('Specification incomplete');
-console.log(`Environment OK: Node ${process.versions.node}; ${required.length} required paths. Application features are not implemented yet.`);
+console.log(`Environment OK: Node ${process.versions.node}; ${required.length} required paths. Run product tests to validate application behavior.`);

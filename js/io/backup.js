@@ -1,14 +1,25 @@
-import {defaults} from '../domain/model.js';
+import {validateState} from './validation.js';
 const MAX=20*1024*1024;
 export function backup(state){return JSON.stringify({format:'elektrosmeta-backup',schemaVersion:1,createdAt:new Date().toISOString(),data:state},null,2);}
-export function validateBackup(text){if(text.length>MAX)throw Error('Файл больше 20 МБ');let b;try{b=JSON.parse(text);}catch{throw Error('Файл не является JSON');}if(b.format!=='elektrosmeta-backup'||b.schemaVersion!==1||b.data?.schemaVersion!==1)throw Error('Неизвестный формат или более новая версия копии');const s=b.data;
- function scan(x,depth=0){if(depth>40)throw Error('Слишком сложная структура');if(typeof x==='number'&&!Number.isFinite(x))throw Error('Неверное число');if(x&&typeof x==='object')for(const [k,v]of Object.entries(x)){if(['__proto__','prototype','constructor'].includes(k))throw Error('Недопустимое поле');scan(v,depth+1);}}
- scan(s);if(!Array.isArray(s.projects)||!s.catalogs||!Array.isArray(s.catalogs.materials)||!Array.isArray(s.catalogs.appliances)||!Array.isArray(s.prices)||!s.settings)throw Error('Неполная копия');if(s.projects.length>1000)throw Error('Слишком много объектов');const seen=new Set();
- for(const p of s.projects){if(typeof p.id!=='string'||seen.has(p.id)||typeof p.title!=='string'||!['quick','plan'].includes(p.mode))throw Error('Повреждён объект');seen.add(p.id);for(const k of ['walls','rooms','openings','points','loads','circuits','routes','cables','conduits','mounts','chases','devices','versions','prices','materials','extra'])if(!Array.isArray(p[k]))throw Error('Отсутствует список '+k);if(p.points.length>5000||p.routes.length>10000)throw Error('Превышены лимиты геометрии');for(const k of ['height','uLN','uLL','complexity'])if(!(typeof p[k]==='number'&&p[k]>0))throw Error('Неверный параметр '+k);for(const k of ['markup','discount'])if(!(typeof p[k]==='number'&&p[k]>=0&&p[k]<=100))throw Error('Неверный процент');const refs={points:new Set(p.points.map(x=>x.id)),routes:new Set(p.routes.map(x=>x.id)),circuits:new Set(p.circuits.map(x=>x.id))};for(const pt of p.points){if(!Number.isInteger(pt.x)||!Number.isInteger(pt.y)||!Number.isInteger(pt.height)||pt.height<0||pt.height>p.height||!Number.isInteger(pt.count)||pt.count<1)throw Error('Неверная точка');if(pt.circuitId&&!refs.circuits.has(pt.circuitId))throw Error('Отсутствует линия точки');}for(const l of p.loads)if(!refs.points.has(l.pointId)||l.power!==null&&l.power<0)throw Error('Повреждена нагрузка');for(const r of [...p.routes,...p.chases]){if(!Array.isArray(r.vertices)||r.vertices.length<2||r.vertices.some(v=>!Array.isArray(v)||v.length!==3||v.some(n=>!Number.isInteger(n))))throw Error('Повреждена трасса');}for(const c of [...p.cables,...p.mounts,...p.conduits])if(!Array.isArray(c.routeIds)||c.routeIds.some(id=>!refs.routes.has(id)))throw Error('Повреждены ссылки трассы');for(const l of [...p.prices,...p.materials,...p.extra])if(l.price!==null&&(!Number.isSafeInteger(l.price)||l.price<0))throw Error('Повреждена цена');}
- for(const key of Object.keys(defaults()))if(!(key in s))throw Error('Отсутствует раздел '+key);return s;
+export function validateBackup(text){
+ if(new TextEncoder().encode(text).length>MAX)throw Error('Файл больше 20 МБ');let b;
+ try{b=JSON.parse(text);}catch{throw Error('Файл не является JSON');}
+ if(b.format!=='elektrosmeta-backup'||b.schemaVersion!==1||b.data?.schemaVersion!==1)throw Error('Неизвестный формат или более новая версия копии');
+ function scan(x,depth=0){if(depth>40)throw Error('Слишком сложная структура');if(x&&typeof x==='object')for(const [k,v]of Object.entries(x)){if(['__proto__','prototype','constructor'].includes(k))throw Error('Недопустимое поле');scan(v,depth+1);}}
+ scan(b.data);return validateState(b.data);
 }
+let nativeBusy=false;
 export async function deliver(blob,name,action='save'){
- if(window.Android){const bytes=new Uint8Array(await blob.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));window.Android.exportFile(name,blob.type,btoa(binary),action);return;}
- if(action==='share'){const f=new File([blob],name,{type:blob.type});if(navigator.canShare?.({files:[f]})){await navigator.share({files:[f]});return;}}
- const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
+ if(window.Android){
+  if(nativeBusy)throw Error('Завершите предыдущее сохранение');
+  const bytes=new Uint8Array(await blob.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
+  nativeBusy=true;
+  return new Promise((resolve,reject)=>{
+   const handle=event=>{const result=event.detail;window.removeEventListener('native-file-result',handle);nativeBusy=false;if(result.status==='error')reject(Error(result.message));else resolve(result);};
+   window.addEventListener('native-file-result',handle);
+   try{window.Android.exportFile(name,blob.type,btoa(binary),action);}catch(error){window.removeEventListener('native-file-result',handle);nativeBusy=false;reject(error);}
+  });
+ }
+ if(action==='share'){const f=new File([blob],name,{type:blob.type});if(navigator.canShare?.({files:[f]})){try{await navigator.share({files:[f]});return {status:'shared'};}catch(e){if(e.name==='AbortError')return {status:'cancel'};throw e;}}}
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);return {status:'download'};
 }
