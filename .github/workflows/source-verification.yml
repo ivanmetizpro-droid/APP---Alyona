@@ -1,0 +1,29 @@
+name: Fetch primary standards for verification
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/source-verification.yml']
+permissions:
+  contents: write
+concurrency:
+  group: source-verification
+  cancel-in-progress: false
+jobs:
+  fetch-primary-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Fetch user-specified primary documents with TLS verification
+        run: |
+          mkdir -p verification-sources
+          curl --fail --location --retry 2 --max-time 120 https://files.stroyinf.ru/Data/524/52467.pdf -o verification-sources/GOST-50571-5-52-amended.pdf
+          curl --fail --location --retry 2 --max-time 120 https://meganorm.ru/Data2/1/4293792/4293792410.pdf -o verification-sources/GOST-50571-5-52.pdf
+          sha256sum verification-sources/*.pdf > verification-sources/SHA256SUMS
+      - name: Preserve evidence in a separate review branch accessible through Git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add verification-sources
+          git commit -m 'Preserve primary source documents for local verification'
+          git push origin HEAD:refs/heads/codex/source-verification
