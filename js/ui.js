@@ -1,0 +1,18 @@
+import {number,money} from './domain/units.js';
+export const esc = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export const button=(title,act,id='',cls='')=>`<button class="${cls}" data-act="${act}" data-id="${esc(id)}">${esc(title)}</button>`;
+export const field=(label,key,value='',type='text',extra='')=>`<label>${esc(label)}<input type="${type}" data-field="${esc(key)}" value="${esc(value)}" ${extra}></label>`;
+export const check=(label,key,value)=>`<label class="check"><input type="checkbox" data-field="${esc(key)}" ${value?'checked':''}>${esc(label)}</label>`;
+export const select=(label,key,value,options)=>`<label>${esc(label)}<select data-field="${key}">${options.map(([v,t])=>`<option value="${esc(v)}" ${String(value)===String(v)?'selected':''}>${esc(t)}</option>`).join('')}</select></label>`;
+let timer;
+export function toast(message){const e=document.getElementById('toast');e.textContent=message;e.style.display='block';clearTimeout(timer);timer=setTimeout(()=>e.style.display='none',5000);}
+export function modal(title,spec,initial={},help=''){
+ const d=document.getElementById('dialog'),prior=document.activeElement;
+ d.innerHTML=`<form><h2>${esc(title)}</h2>${help?`<p class="help">${esc(help)}</p>`:''}<div class="form-grid">${spec.map(s=>{const v=initial[s.key]??s.default??'';if(s.type==='select')return select(s.label,s.key,v,s.options);if(s.type==='check')return check(s.label,s.key,v);if(s.type==='textarea')return `<label class="span-all">${esc(s.label)}<textarea data-field="${s.key}">${esc(v)}</textarea></label>`;return field(s.label,s.key,s.type==='money'&&v!==''?v/100:v,s.type==='date'?'date':'text',s.type==='number'||s.type==='money'?'inputmode="decimal"':'');}).join('')}</div><p class="error" id="form-error" hidden></p><div class="actions"><button type="button" id="cancel-dialog">Отмена</button><button class="primary" type="submit">Сохранить</button></div></form>`;
+ return new Promise(resolve=>{function done(v){d.close();prior?.focus();resolve(v);}d.oncancel=e=>{e.preventDefault();done(null);};d.querySelector('#cancel-dialog').onclick=()=>done(null);d.querySelector('form').onsubmit=e=>{e.preventDefault();try{const values={};for(const s of spec){const el=d.querySelector(`[data-field="${s.key}"]`);let value=s.type==='check'?el.checked:el.value;if(s.type==='number')value=number(value,{min:s.min??0,max:s.max??1e8,integer:s.integer||false});if(s.type==='money')value=money(value);if(s.required&&(value===null||value===''))throw Error('Заполните: '+s.label);if(s.type==='select'&&s.numeric)value=Number(value);values[s.key]=value;}done(values);}catch(err){const el=d.querySelector('#form-error');el.textContent=err.message;el.hidden=false;}};d.showModal();});
+}
+export const text=(key,label,extra={})=>({key,label,...extra});
+export const num=(key,label,extra={})=>({key,label,type:'number',...extra});
+export const choice=(key,label,options,extra={})=>({key,label,type:'select',options,...extra});
+export const price=(key='price',label='Цена, ₽')=>({key,label,type:'money'});
+export const bool=(key,label)=>({key,label,type:'check'});

@@ -1,0 +1,44 @@
+{
+  "name": "elektrosmeta",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Среда разработки приложения электрика по согласованному ТЗ",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <25",
+    "npm": ">=10"
+  },
+  "packageManager": "npm@11.9.0",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "vendor": "node scripts/prepare-vendor.mjs",
+    "lint": "eslint .",
+    "test": "node --test tests/unit/*.test.mjs",
+    "test:e2e": "playwright test",
+    "check": "npm run doctor && npm run lint && npm test",
+    "test:all": "npm run check && npm run test:e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanmetizpro-droid/APP---Alyona.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ivanmetizpro-droid/APP---Alyona/issues"
+  },
+  "homepage": "https://github.com/ivanmetizpro-droid/APP---Alyona#readme",
+  "dependencies": {
+    "jspdf": "4.2.1",
+    "jspdf-autotable": "5.0.9"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "eslint": "10.12.0",
+    "globals": "17.13.0"
+  }
+}
