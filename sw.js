@@ -1,4 +1,4 @@
-const CACHE="elektrosmeta-1.0.0-dd623c103baf";
+const CACHE="elektrosmeta-1.0.0-057672803bd5";
 const FILES=["./","index.html","manifest.webmanifest","js/app.js","js/calc/engine.js","js/domain/geometry.js","js/domain/model.js","js/domain/units.js","js/editor/svg-editor.js","js/io/backup.js","js/io/validation.js","js/pdf/generate.js","js/rules/profile.js","js/storage/db.js","js/ui.js","css/base.css","assets/fonts/DejaVuSans-Bold.ttf","assets/fonts/DejaVuSans.ttf","assets/icons/icon.svg","assets/vendor/jspdf.plugin.autotable.min.js","assets/vendor/jspdf.umd.min.js"];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

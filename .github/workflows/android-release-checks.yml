@@ -20,8 +20,12 @@ jobs:
           sudo chmod 666 /dev/kvm
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'emulator' 'platform-tools' 'system-images;android-34;default;x86_64'
-          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --name Elektro --package 'system-images;android-34;default;x86_64' --device pixel
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/elektro-avd"
+          mkdir -p "$ANDROID_AVD_HOME"
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --name Elektro --path "$ANDROID_AVD_HOME/Elektro.avd" --package 'system-images;android-34;default;x86_64' --device pixel
+          printf 'avd.ini.encoding=UTF-8\npath=%s/Elektro.avd\ntarget=android-34\n' "$ANDROID_AVD_HOME" > "$ANDROID_AVD_HOME/Elektro.ini"
           mkdir -p android-validation
+          "$ANDROID_HOME/emulator/emulator" -list-avds > android-validation/avd-list.txt
           "$ANDROID_HOME/emulator/emulator" -avd Elektro -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -memory 2048 -cores 2 > android-validation/emulator.log 2>&1 &
           python3 - <<'PY'
           import subprocess,time
