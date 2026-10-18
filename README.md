@@ -1,19 +1,48 @@
-# Электросмета
+# Электросмета 1.0.0
 
-Автономное приложение электрика: ручная смета и смета по плану, SVG-редактор,
-материалы, нагрузки и щит, версии, локальный PDF с кириллицей и резервные копии.
-HTML/CSS/JavaScript и безопасная локальная Android-оболочка на Java.
+Автономное Android-приложение электрика: ручная смета и смета по плану,
+точная планировка, точки, физические кабели и трассы, штробы, библиотеки,
+нагрузки и щит, версии смет, клиентский PDF и резервные копии JSON.
+Рабочая логика написана на HTML/CSS/JavaScript; Android-оболочка на Java
+содержит ресурсы приложения, шрифты и генератор PDF локально.
 
-## Промежуточная разработка
+- [Установочный APK](artifacts/Elektrosmeta-1.0.0.apk)
+- [SHA-256 APK](artifacts/Elektrosmeta-1.0.0.apk.sha256)
+- [Установка и работа с приложением](docs/USER_GUIDE.md)
+- [Фактически выполненные проверки](docs/ACCEPTANCE.md)
+- [Готовность и ограничения](docs/IMPLEMENTATION_STATUS.md)
+- [Связь требований с кодом и тестами](docs/TRACEABILITY.md)
 
-Реализация и Android-сборка продолжаются. Фактический статус:
-[docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md).
-Продуктовая приёмка этого промежуточного коммита ещё не завершена.
+Пакет `ru.elektrosmeta.app`, версия `1.0.0` (код 1), Android 8.0 и новее
+(minSdk 26, targetSdk 34). Сервер и учётная запись не требуются.
+Данные хранятся на устройстве; удаление приложения удаляет локальные объекты.
+Перед удалением или переносом сохраните JSON-копию через «Настройки».
+Начальный прайс пуст: заполните собственные цены перед выпуском сметы.
 
-Веб-разработка: `npm ci --cache /workspace/.npm-cache`, `npm run vendor`, `npm run dev`.
-Проверки: `npm run check`, `npm run test:e2e`.
-Android: `scripts/install-android.py`, `scripts/create-signing-key.sh`, `scripts/build-android.sh`.
-Ключ находится вне репозитория; не публикуйте его и резервные копии объектов.
+Ограниченный профиль предлагает тепловые кандидаты Cu/PVC70 для одной цепи,
+методов B2/C и воздуха 30 °C только после явного подтверждения условий и
+ввода паспортных параметров аппарата. Он не выполняет полную электрическую
+проверку проекта. Источники, применимость и непроверенное перечислены в
+[RULES_VERIFICATION.md](docs/RULES_VERIFICATION.md).
 
-Требования: [полное ТЗ](docs/TZ_Elektrosmeta_HTML_CSS_JavaScript_Codex.md),
-[Android-дополнение](docs/ANDROID_DELIVERY.md).
+## Разработка и сборка
+
+```bash
+npm ci
+npm run vendor
+npm run dev
+npm run check
+npm run test:e2e
+bash scripts/build-android.sh
+```
+
+Node.js 22–24; версии зависимостей закреплены в lock-файле.
+Подготовка инструментов и облачной среды описана в
+[CODEX_ENVIRONMENT.md](docs/CODEX_ENVIRONMENT.md).
+Сборка использует существующий ключ из `/workspace/private-signing`
+(путь можно изменить через `ELEKTROSMETA_SIGNING_DIR`). Ключ, пароль и
+приватная резервная копия не входят в Git и не должны публиковаться.
+Для обновлений необходимо сохранять прежний ключ подписи.
+
+Требования: [полное ТЗ](docs/TZ_Elektrosmeta_HTML_CSS_JavaScript_Codex.md)
+и [Android-дополнение](docs/ANDROID_DELIVERY.md).

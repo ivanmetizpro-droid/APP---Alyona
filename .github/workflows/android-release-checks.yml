@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - name: Prepare official Android emulator with KVM
         run: |
+          mkdir -p android-validation
+          exec > >(tee android-validation/prepare.log) 2>&1
           test -c /dev/kvm
           sudo chmod 666 /dev/kvm
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
@@ -26,12 +28,17 @@ jobs:
           printf 'avd.ini.encoding=UTF-8\npath=%s/Elektro.avd\ntarget=android-34\n' "$ANDROID_AVD_HOME" > "$ANDROID_AVD_HOME/Elektro.ini"
           mkdir -p android-validation
           "$ANDROID_HOME/emulator/emulator" -list-avds > android-validation/avd-list.txt
-          "$ANDROID_HOME/emulator/emulator" -avd Elektro -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -memory 2048 -cores 2 > android-validation/emulator.log 2>&1 &
+          "$ANDROID_HOME/emulator/emulator" -avd Elektro -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -no-metrics -feature -Vulkan -memory 2048 -cores 2 > android-validation/emulator.log 2>&1 &
           python3 - <<'PY'
           import subprocess,time
           adb='adb'
           for _ in range(100):
-              r=subprocess.run([adb,'shell','getprop','sys.boot_completed'],capture_output=True,text=True,timeout=20)
+              try:
+                  r=subprocess.run([adb,'shell','getprop','sys.boot_completed'],capture_output=True,text=True,timeout=20)
+              except subprocess.TimeoutExpired:
+                  print('ADB boot probe timed out; waiting for device',flush=True)
+                  time.sleep(4)
+                  continue
               if r.stdout.strip()=='1': break
               time.sleep(4)
           else: raise RuntimeError('Android did not boot')
