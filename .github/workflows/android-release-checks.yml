@@ -1,0 +1,61 @@
+name: Android 14 signed release checks
+on:
+  workflow_dispatch:
+  push:
+    paths: ['artifacts/Elektrosmeta-1.0.0.apk', '.github/workflows/android-release-checks.yml']
+permissions:
+  contents: write
+concurrency:
+  group: android-release-checks
+  cancel-in-progress: false
+jobs:
+  android14:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - name: Prepare official Android emulator with KVM
+        run: |
+          test -c /dev/kvm
+          sudo chmod 666 /dev/kvm
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses >/dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'emulator' 'platform-tools' 'system-images;android-34;default;x86_64'
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --name Elektro --package 'system-images;android-34;default;x86_64' --device pixel
+          mkdir -p android-validation
+          "$ANDROID_HOME/emulator/emulator" -avd Elektro -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -memory 2048 -cores 2 > android-validation/emulator.log 2>&1 &
+          python3 - <<'PY'
+          import subprocess,time
+          adb='adb'
+          for _ in range(100):
+              r=subprocess.run([adb,'shell','getprop','sys.boot_completed'],capture_output=True,text=True,timeout=20)
+              if r.stdout.strip()=='1': break
+              time.sleep(4)
+          else: raise RuntimeError('Android did not boot')
+          PY
+          adb shell input keyevent 82
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          adb shell getprop ro.build.version.release > android-validation/android-version.txt
+          adb shell dumpsys webviewupdate > android-validation/webview.txt
+      - name: Install the actual signed release and execute native checks
+        run: |
+          adb install --no-incremental -r artifacts/Elektrosmeta-1.0.0.apk
+          adb install --no-incremental -r artifacts/NativeChecks.apk
+          adb shell am instrument -w ru.elektrosmeta.tests/ru.elektrosmeta.tests.NativeChecks | tee android-validation/native-checks.log
+      - name: Preserve verification evidence
+        if: always()
+        run: |
+          adb exec-out screencap -p > android-validation/android-screen.png || true
+          adb logcat -d -s AndroidRuntime:E chromium:V > android-validation/webview.log || true
+          adb pull /sdcard/Download android-validation/downloads || true
+          sha256sum artifacts/Elektrosmeta-1.0.0.apk > android-validation/APK-SHA256
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f android-validation
+          git commit -m 'Record Android 14 signed release verification evidence'
+          git push origin HEAD:refs/heads/codex/android-native-evidence
+      - name: Require successful functional native checks
+        run: |
+          grep -q 'PASS: native JSON import restored validated state' android-validation/native-checks.log
+          ! grep -q 'FAIL:' android-validation/native-checks.log

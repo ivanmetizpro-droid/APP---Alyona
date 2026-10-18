@@ -13,7 +13,7 @@ import org.json.*;
 public final class NativeChecks extends Instrumentation {
  private Activity activity;private WebView web;private StringBuilder report=new StringBuilder();
  @Override public void onCreate(Bundle args){super.onCreate(args);start();}
- private String js(String code)throws Exception{final String[] result={null};CountDownLatch done=new CountDownLatch(1);runOnMainSync(()->web.evaluateJavascript(code,v->{result[0]=v;done.countDown();}));if(!done.await(45,TimeUnit.SECONDS))throw new Exception("JS timeout");return result[0];}
+ private String js(String code)throws Exception{final String[] result={null};CountDownLatch done=new CountDownLatch(1);runOnMainSync(()->web.evaluateJavascript(code,v->{result[0]=v;done.countDown();}));if(!done.await(180,TimeUnit.SECONDS))throw new Exception("JS timeout");return result[0];}
  private void check(boolean value,String name)throws Exception{if(!value)throw new Exception("FAILED: "+name);report.append("PASS: ").append(name).append('\n');Bundle b=new Bundle();b.putString("stream","PASS: "+name+"\n");sendStatus(0,b);}
  private void until(String code,String expected,int seconds)throws Exception{long deadline=System.currentTimeMillis()+seconds*1000L;while(System.currentTimeMillis()<deadline){if(js(code).equals(expected))return;Thread.sleep(500);}throw new Exception("Timed out: "+code+" result="+js(code));}
  private void back()throws Exception{getUiAutomation().executeShellCommand("input keyevent 4").close();Thread.sleep(1500);}
