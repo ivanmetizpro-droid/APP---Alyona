@@ -58,6 +58,8 @@ jobs:
         if: always()
         run: |
           "$ANDROID_HOME/platform-tools/adb" exec-out screencap -p > android-validation/android-screen.png || true
+          "$ANDROID_HOME/platform-tools/adb" shell uiautomator dump /sdcard/elektro-ui.xml || true
+          "$ANDROID_HOME/platform-tools/adb" pull /sdcard/elektro-ui.xml android-validation/ui.xml || true
           "$ANDROID_HOME/platform-tools/adb" logcat -d -s AndroidRuntime:E chromium:V > android-validation/webview.log || true
           "$ANDROID_HOME/platform-tools/adb" pull /sdcard/Download android-validation/downloads || true
           sha256sum artifacts/Elektrosmeta-1.0.0.apk > android-validation/APK-SHA256
