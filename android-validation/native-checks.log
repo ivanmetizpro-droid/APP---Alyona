@@ -1,0 +1,22 @@
+PASS: local HTTPS origin
+PASS: release is not debuggable
+PASS: file/content access and mixed content disabled
+PASS: functional plan estimate and version created in Android WebView
+PASS: native PDF SAF cancel returns cancel
+PASS: native PDF saved through SAF
+PASS: native PDF share chooser opened with temporary URI
+PASS: cancelled JSON backup does not mark backup saved
+PASS: native JSON backup saved through SAF
+PASS: native JSON import cancel leaves project intact
+PASS: local HTTPS origin
+PASS: release is not debuggable
+PASS: file/content access and mixed content disabled
+PASS: functional plan estimate and version created in Android WebView
+PASS: native PDF SAF cancel returns cancel
+PASS: native PDF saved through SAF
+PASS: native PDF share chooser opened with temporary URI
+PASS: cancelled JSON backup does not mark backup saved
+PASS: native JSON backup saved through SAF
+PASS: native JSON import cancel leaves project intact
+FAIL: java.lang.Exception: System button not found: [elektrosmeta-backup-2026-10-18.json]
+

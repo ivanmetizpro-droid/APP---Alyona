@@ -1,0 +1,1055 @@
+{
+  "format": "elektrosmeta-backup",
+  "schemaVersion": 1,
+  "createdAt": "2026-10-18T02:24:46.029Z",
+  "data": {
+    "schemaVersion": 1,
+    "revision": 2,
+    "projects": [
+      {
+        "id": "e3880488-0f5f-4c63-b999-1d14685d0532",
+        "schemaVersion": 1,
+        "title": "Демо · квартира 36 м²",
+        "mode": "plan",
+        "status": "Замер",
+        "client": "Пример для проверки",
+        "phone": "",
+        "address": "Учебный объект — цены условные",
+        "area": null,
+        "note": "",
+        "date": "2026-10-18",
+        "height": 2700,
+        "supply": 1,
+        "uLN": 220,
+        "uLL": 380,
+        "inputA": null,
+        "complexity": 1,
+        "markup": 0,
+        "discount": 0,
+        "includeMaterials": true,
+        "mainLevel": "floor",
+        "reserve": 5,
+        "revision": 1,
+        "prices": [
+          {
+            "id": "demolition",
+            "name": "Демонтаж",
+            "unit": "шт.",
+            "price": 10000
+          },
+          {
+            "id": "chase",
+            "name": "Штробление",
+            "unit": "м",
+            "price": 30000
+          },
+          {
+            "id": "box",
+            "name": "Отверстие и монтаж подрозетника",
+            "unit": "шт.",
+            "price": 45000
+          },
+          {
+            "id": "cable",
+            "name": "Прокладка кабеля",
+            "unit": "м",
+            "price": 8000
+          },
+          {
+            "id": "mechanism",
+            "name": "Монтаж розетки / выключателя",
+            "unit": "шт.",
+            "price": 25000
+          },
+          {
+            "id": "light",
+            "name": "Монтаж точки освещения",
+            "unit": "шт.",
+            "price": 40000
+          },
+          {
+            "id": "panel",
+            "name": "Сборка и монтаж щита",
+            "unit": "шт.",
+            "price": 500000
+          },
+          {
+            "id": "circuit",
+            "name": "Подключение линии в щите",
+            "unit": "линия",
+            "price": 35000
+          },
+          {
+            "id": "testing",
+            "name": "Проверка и запуск",
+            "unit": "объект",
+            "price": 150000
+          },
+          {
+            "id": "fill",
+            "name": "Заделка штроб",
+            "unit": "м",
+            "price": 12000
+          }
+        ],
+        "materials": [
+          {
+            "id": "cable",
+            "name": "Кабель — уточнить марку",
+            "category": "cable",
+            "unit": "м",
+            "price": 7000
+          },
+          {
+            "id": "conduit",
+            "name": "Гофра — уточнить тип",
+            "category": "conduit",
+            "unit": "м",
+            "price": 2000
+          },
+          {
+            "id": "box",
+            "name": "Подрозетник",
+            "category": "box",
+            "unit": "шт.",
+            "price": 5000
+          },
+          {
+            "id": "mechanism",
+            "name": "Механизм розетки / выключателя",
+            "category": "mechanism",
+            "unit": "шт.",
+            "price": 15000
+          },
+          {
+            "id": "mount",
+            "name": "Крепление",
+            "category": "mount",
+            "unit": "шт.",
+            "price": 1000
+          },
+          {
+            "id": "hardware",
+            "name": "Метиз",
+            "category": "hardware",
+            "unit": "шт.",
+            "price": 300
+          },
+          {
+            "id": "primer",
+            "name": "Грунтовка",
+            "category": "primer",
+            "unit": "л",
+            "price": 12000,
+            "rate": 0.2,
+            "layers": 1
+          },
+          {
+            "id": "filler",
+            "name": "Смесь для заделки",
+            "category": "filler",
+            "unit": "кг",
+            "price": 4000,
+            "rate": 1000,
+            "packageSize": null
+          }
+        ],
+        "executor": {
+          "executor": "",
+          "phone": "",
+          "logo": null,
+          "lastBackupAt": null
+        },
+        "quick": {},
+        "overrides": {},
+        "extra": [],
+        "walls": [
+          {
+            "id": "13590a6d-53df-4ed2-ae7a-e6c97f9cb800",
+            "x1": 0,
+            "y1": 0,
+            "x2": 6000,
+            "y2": 0,
+            "thickness": 150,
+            "height": 2700,
+            "material": "Кирпич",
+            "structuralRole": "unknown"
+          },
+          {
+            "id": "af9a13d3-dffe-4890-8336-a77c2afbe54a",
+            "x1": 6000,
+            "y1": 0,
+            "x2": 6000,
+            "y2": 6000,
+            "thickness": 150,
+            "height": 2700,
+            "material": "Кирпич",
+            "structuralRole": "unknown"
+          },
+          {
+            "id": "9f5e19c1-e14c-4c9e-8c8b-cdbf4d2cd3d7",
+            "x1": 6000,
+            "y1": 6000,
+            "x2": 0,
+            "y2": 6000,
+            "thickness": 150,
+            "height": 2700,
+            "material": "Кирпич",
+            "structuralRole": "unknown"
+          },
+          {
+            "id": "d0a54ce5-3591-48b2-8135-d7c89600a14e",
+            "x1": 0,
+            "y1": 6000,
+            "x2": 0,
+            "y2": 0,
+            "thickness": 150,
+            "height": 2700,
+            "material": "Кирпич",
+            "structuralRole": "unknown"
+          }
+        ],
+        "rooms": [
+          {
+            "id": "08450245-d5f4-42b3-b396-00f1e486a259",
+            "name": "Комната",
+            "polygon": [
+              [
+                0,
+                0
+              ],
+              [
+                6000,
+                0
+              ],
+              [
+                6000,
+                6000
+              ],
+              [
+                0,
+                6000
+              ]
+            ],
+            "height": 2700
+          }
+        ],
+        "openings": [],
+        "points": [
+          {
+            "id": "0a8ab520-4e0d-426e-a00d-50e6abf6cbb8",
+            "type": "socket",
+            "label": "Рабочее место",
+            "x": 1500,
+            "y": 0,
+            "height": 300,
+            "reference": "floor",
+            "count": 3,
+            "circuitId": "f2e76443-80f0-4b34-a342-94843a7a9e04"
+          }
+        ],
+        "loads": [
+          {
+            "id": "d4322923-e55c-41bc-a064-fb220f2a0e5c",
+            "pointId": "0a8ab520-4e0d-426e-a00d-50e6abf6cbb8",
+            "name": "Нагреватель (демо)",
+            "power": 2000,
+            "quantity": 1,
+            "supply": 1,
+            "cos": 1,
+            "basis": "electrical",
+            "efficiency": null
+          }
+        ],
+        "circuits": [
+          {
+            "id": "f2e76443-80f0-4b34-a342-94843a7a9e04",
+            "name": "Розеточная группа",
+            "phase": "L1",
+            "supply": 1,
+            "demand": 1,
+            "locked": false
+          }
+        ],
+        "routes": [
+          {
+            "id": "a786858c-15a6-482a-9bdc-084f01556a46",
+            "name": "Открытая трасса",
+            "vertices": [
+              [
+                0,
+                0,
+                300
+              ],
+              [
+                1500,
+                0,
+                300
+              ]
+            ],
+            "installation": "open",
+            "role": "main"
+          }
+        ],
+        "cables": [
+          {
+            "id": "4b0a9309-0a93-4a5c-8e09-9ddbc7c417ba",
+            "circuitId": "f2e76443-80f0-4b34-a342-94843a7a9e04",
+            "routeIds": [
+              "a786858c-15a6-482a-9bdc-084f01556a46"
+            ],
+            "materialId": "cable",
+            "reserve": 5,
+            "slackStart": 0,
+            "slackEnd": 0
+          }
+        ],
+        "conduits": [],
+        "mounts": [
+          {
+            "id": "bad79c6f-004e-4f80-a47f-f7557be8494f",
+            "routeIds": [
+              "a786858c-15a6-482a-9bdc-084f01556a46"
+            ],
+            "materialId": "mount",
+            "hardwareId": "hardware",
+            "norm": 2
+          }
+        ],
+        "chases": [],
+        "devices": [
+          {
+            "id": "0700a220-b336-4f7a-81d5-56770e2fbce9",
+            "name": "Автомат (ручной пример)",
+            "kind": "Автомат",
+            "rated": 16,
+            "modules": 1,
+            "price": 50000,
+            "circuitIds": [
+              "f2e76443-80f0-4b34-a342-94843a7a9e04"
+            ],
+            "iz": null,
+            "i2": null,
+            "upstreamId": null
+          }
+        ],
+        "panel": {
+          "rows": [
+            12,
+            12
+          ],
+          "reservePct": 20
+        },
+        "versions": [
+          {
+            "id": "6376aea8-62f8-442f-ab3e-b1dec905093f",
+            "version": 1,
+            "createdAt": "2026-10-18T02:24:33.891Z",
+            "sourceRevision": 0,
+            "project": {
+              "id": "e3880488-0f5f-4c63-b999-1d14685d0532",
+              "schemaVersion": 1,
+              "title": "Демо · квартира 36 м²",
+              "mode": "plan",
+              "status": "Замер",
+              "client": "Пример для проверки",
+              "phone": "",
+              "address": "Учебный объект — цены условные",
+              "area": null,
+              "note": "",
+              "date": "2026-10-18",
+              "height": 2700,
+              "supply": 1,
+              "uLN": 220,
+              "uLL": 380,
+              "inputA": null,
+              "complexity": 1,
+              "markup": 0,
+              "discount": 0,
+              "includeMaterials": true,
+              "mainLevel": "floor",
+              "reserve": 5,
+              "revision": 0,
+              "prices": [
+                {
+                  "id": "demolition",
+                  "name": "Демонтаж",
+                  "unit": "шт.",
+                  "price": 10000
+                },
+                {
+                  "id": "chase",
+                  "name": "Штробление",
+                  "unit": "м",
+                  "price": 30000
+                },
+                {
+                  "id": "box",
+                  "name": "Отверстие и монтаж подрозетника",
+                  "unit": "шт.",
+                  "price": 45000
+                },
+                {
+                  "id": "cable",
+                  "name": "Прокладка кабеля",
+                  "unit": "м",
+                  "price": 8000
+                },
+                {
+                  "id": "mechanism",
+                  "name": "Монтаж розетки / выключателя",
+                  "unit": "шт.",
+                  "price": 25000
+                },
+                {
+                  "id": "light",
+                  "name": "Монтаж точки освещения",
+                  "unit": "шт.",
+                  "price": 40000
+                },
+                {
+                  "id": "panel",
+                  "name": "Сборка и монтаж щита",
+                  "unit": "шт.",
+                  "price": 500000
+                },
+                {
+                  "id": "circuit",
+                  "name": "Подключение линии в щите",
+                  "unit": "линия",
+                  "price": 35000
+                },
+                {
+                  "id": "testing",
+                  "name": "Проверка и запуск",
+                  "unit": "объект",
+                  "price": 150000
+                },
+                {
+                  "id": "fill",
+                  "name": "Заделка штроб",
+                  "unit": "м",
+                  "price": 12000
+                }
+              ],
+              "materials": [
+                {
+                  "id": "cable",
+                  "name": "Кабель — уточнить марку",
+                  "category": "cable",
+                  "unit": "м",
+                  "price": 7000
+                },
+                {
+                  "id": "conduit",
+                  "name": "Гофра — уточнить тип",
+                  "category": "conduit",
+                  "unit": "м",
+                  "price": 2000
+                },
+                {
+                  "id": "box",
+                  "name": "Подрозетник",
+                  "category": "box",
+                  "unit": "шт.",
+                  "price": 5000
+                },
+                {
+                  "id": "mechanism",
+                  "name": "Механизм розетки / выключателя",
+                  "category": "mechanism",
+                  "unit": "шт.",
+                  "price": 15000
+                },
+                {
+                  "id": "mount",
+                  "name": "Крепление",
+                  "category": "mount",
+                  "unit": "шт.",
+                  "price": 1000
+                },
+                {
+                  "id": "hardware",
+                  "name": "Метиз",
+                  "category": "hardware",
+                  "unit": "шт.",
+                  "price": 300
+                },
+                {
+                  "id": "primer",
+                  "name": "Грунтовка",
+                  "category": "primer",
+                  "unit": "л",
+                  "price": 12000,
+                  "rate": 0.2,
+                  "layers": 1
+                },
+                {
+                  "id": "filler",
+                  "name": "Смесь для заделки",
+                  "category": "filler",
+                  "unit": "кг",
+                  "price": 4000,
+                  "rate": 1000,
+                  "packageSize": null
+                }
+              ],
+              "executor": {
+                "executor": "",
+                "phone": "",
+                "logo": null,
+                "lastBackupAt": null
+              },
+              "quick": {},
+              "overrides": {},
+              "extra": [],
+              "walls": [
+                {
+                  "id": "13590a6d-53df-4ed2-ae7a-e6c97f9cb800",
+                  "x1": 0,
+                  "y1": 0,
+                  "x2": 6000,
+                  "y2": 0,
+                  "thickness": 150,
+                  "height": 2700,
+                  "material": "Кирпич",
+                  "structuralRole": "unknown"
+                },
+                {
+                  "id": "af9a13d3-dffe-4890-8336-a77c2afbe54a",
+                  "x1": 6000,
+                  "y1": 0,
+                  "x2": 6000,
+                  "y2": 6000,
+                  "thickness": 150,
+                  "height": 2700,
+                  "material": "Кирпич",
+                  "structuralRole": "unknown"
+                },
+                {
+                  "id": "9f5e19c1-e14c-4c9e-8c8b-cdbf4d2cd3d7",
+                  "x1": 6000,
+                  "y1": 6000,
+                  "x2": 0,
+                  "y2": 6000,
+                  "thickness": 150,
+                  "height": 2700,
+                  "material": "Кирпич",
+                  "structuralRole": "unknown"
+                },
+                {
+                  "id": "d0a54ce5-3591-48b2-8135-d7c89600a14e",
+                  "x1": 0,
+                  "y1": 6000,
+                  "x2": 0,
+                  "y2": 0,
+                  "thickness": 150,
+                  "height": 2700,
+                  "material": "Кирпич",
+                  "structuralRole": "unknown"
+                }
+              ],
+              "rooms": [
+                {
+                  "id": "08450245-d5f4-42b3-b396-00f1e486a259",
+                  "name": "Комната",
+                  "polygon": [
+                    [
+                      0,
+                      0
+                    ],
+                    [
+                      6000,
+                      0
+                    ],
+                    [
+                      6000,
+                      6000
+                    ],
+                    [
+                      0,
+                      6000
+                    ]
+                  ],
+                  "height": 2700
+                }
+              ],
+              "openings": [],
+              "points": [
+                {
+                  "id": "0a8ab520-4e0d-426e-a00d-50e6abf6cbb8",
+                  "type": "socket",
+                  "label": "Рабочее место",
+                  "x": 1500,
+                  "y": 0,
+                  "height": 300,
+                  "reference": "floor",
+                  "count": 3,
+                  "circuitId": "f2e76443-80f0-4b34-a342-94843a7a9e04"
+                }
+              ],
+              "loads": [
+                {
+                  "id": "d4322923-e55c-41bc-a064-fb220f2a0e5c",
+                  "pointId": "0a8ab520-4e0d-426e-a00d-50e6abf6cbb8",
+                  "name": "Нагреватель (демо)",
+                  "power": 2000,
+                  "quantity": 1,
+                  "supply": 1,
+                  "cos": 1,
+                  "basis": "electrical",
+                  "efficiency": null
+                }
+              ],
+              "circuits": [
+                {
+                  "id": "f2e76443-80f0-4b34-a342-94843a7a9e04",
+                  "name": "Розеточная группа",
+                  "phase": "L1",
+                  "supply": 1,
+                  "demand": 1,
+                  "locked": false
+                }
+              ],
+              "routes": [
+                {
+                  "id": "a786858c-15a6-482a-9bdc-084f01556a46",
+                  "name": "Открытая трасса",
+                  "vertices": [
+                    [
+                      0,
+                      0,
+                      300
+                    ],
+                    [
+                      1500,
+                      0,
+                      300
+                    ]
+                  ],
+                  "installation": "open",
+                  "role": "main"
+                }
+              ],
+              "cables": [
+                {
+                  "id": "4b0a9309-0a93-4a5c-8e09-9ddbc7c417ba",
+                  "circuitId": "f2e76443-80f0-4b34-a342-94843a7a9e04",
+                  "routeIds": [
+                    "a786858c-15a6-482a-9bdc-084f01556a46"
+                  ],
+                  "materialId": "cable",
+                  "reserve": 5,
+                  "slackStart": 0,
+                  "slackEnd": 0
+                }
+              ],
+              "conduits": [],
+              "mounts": [
+                {
+                  "id": "bad79c6f-004e-4f80-a47f-f7557be8494f",
+                  "routeIds": [
+                    "a786858c-15a6-482a-9bdc-084f01556a46"
+                  ],
+                  "materialId": "mount",
+                  "hardwareId": "hardware",
+                  "norm": 2
+                }
+              ],
+              "chases": [],
+              "devices": [
+                {
+                  "id": "0700a220-b336-4f7a-81d5-56770e2fbce9",
+                  "name": "Автомат (ручной пример)",
+                  "kind": "Автомат",
+                  "rated": 16,
+                  "modules": 1,
+                  "price": 50000,
+                  "circuitIds": [
+                    "f2e76443-80f0-4b34-a342-94843a7a9e04"
+                  ],
+                  "iz": null,
+                  "i2": null,
+                  "upstreamId": null
+                }
+              ],
+              "panel": {
+                "rows": [
+                  12,
+                  12
+                ],
+                "reservePct": 20
+              },
+              "versions": [],
+              "createdAt": "2026-10-18T02:24:33.142Z"
+            },
+            "estimate": {
+              "lines": [
+                {
+                  "id": "box",
+                  "name": "Отверстие и монтаж подрозетника",
+                  "unit": "шт.",
+                  "price": 45000,
+                  "kind": "work",
+                  "sourceKey": "work:box",
+                  "autoQuantity": 3,
+                  "quantity": 3,
+                  "override": null,
+                  "sum": 135000
+                },
+                {
+                  "id": "cable",
+                  "name": "Прокладка кабеля",
+                  "unit": "м",
+                  "price": 8000,
+                  "kind": "work",
+                  "sourceKey": "work:cable",
+                  "autoQuantity": 1.5,
+                  "quantity": 1.5,
+                  "override": null,
+                  "sum": 12000
+                },
+                {
+                  "id": "mechanism",
+                  "name": "Монтаж розетки / выключателя",
+                  "unit": "шт.",
+                  "price": 25000,
+                  "kind": "work",
+                  "sourceKey": "work:mechanism",
+                  "autoQuantity": 3,
+                  "quantity": 3,
+                  "override": null,
+                  "sum": 75000
+                },
+                {
+                  "id": "panel",
+                  "name": "Сборка и монтаж щита",
+                  "unit": "шт.",
+                  "price": 500000,
+                  "kind": "work",
+                  "sourceKey": "work:panel",
+                  "autoQuantity": 1,
+                  "quantity": 1,
+                  "override": null,
+                  "sum": 500000
+                },
+                {
+                  "id": "circuit",
+                  "name": "Подключение линии в щите",
+                  "unit": "линия",
+                  "price": 35000,
+                  "kind": "work",
+                  "sourceKey": "work:circuit",
+                  "autoQuantity": 1,
+                  "quantity": 1,
+                  "override": null,
+                  "sum": 35000
+                },
+                {
+                  "id": "testing",
+                  "name": "Проверка и запуск",
+                  "unit": "объект",
+                  "price": 150000,
+                  "kind": "work",
+                  "sourceKey": "work:testing",
+                  "autoQuantity": 1,
+                  "quantity": 1,
+                  "override": null,
+                  "sum": 150000
+                },
+                {
+                  "id": "cable",
+                  "name": "Кабель — уточнить марку",
+                  "category": "cable",
+                  "unit": "м",
+                  "price": 7000,
+                  "kind": "material",
+                  "sourceKey": "material:cable",
+                  "quantity": 1.6,
+                  "autoQuantity": 1.6,
+                  "sum": 11200
+                },
+                {
+                  "id": "mount",
+                  "name": "Крепление",
+                  "category": "mount",
+                  "unit": "шт.",
+                  "price": 1000,
+                  "kind": "material",
+                  "sourceKey": "material:mount",
+                  "quantity": 5,
+                  "autoQuantity": 5,
+                  "sum": 5000
+                },
+                {
+                  "id": "hardware",
+                  "name": "Метиз",
+                  "category": "hardware",
+                  "unit": "шт.",
+                  "price": 300,
+                  "kind": "material",
+                  "sourceKey": "material:hardware",
+                  "quantity": 10,
+                  "autoQuantity": 10,
+                  "sum": 3000
+                },
+                {
+                  "id": "box",
+                  "name": "Подрозетник",
+                  "category": "box",
+                  "unit": "шт.",
+                  "price": 5000,
+                  "kind": "material",
+                  "sourceKey": "material:box",
+                  "quantity": 3,
+                  "autoQuantity": 3,
+                  "sum": 15000
+                },
+                {
+                  "id": "mechanism",
+                  "name": "Механизм розетки / выключателя",
+                  "category": "mechanism",
+                  "unit": "шт.",
+                  "price": 15000,
+                  "kind": "material",
+                  "sourceKey": "material:mechanism",
+                  "quantity": 3,
+                  "autoQuantity": 3,
+                  "sum": 45000
+                },
+                {
+                  "id": "0700a220-b336-4f7a-81d5-56770e2fbce9",
+                  "name": "Автомат (ручной пример)",
+                  "unit": "шт.",
+                  "quantity": 1,
+                  "price": 50000,
+                  "kind": "material",
+                  "sourceKey": "device:0700a220-b336-4f7a-81d5-56770e2fbce9",
+                  "sum": 50000
+                }
+              ],
+              "work": 907000,
+              "materials": 129200,
+              "total": 1036200,
+              "errors": [],
+              "complete": true
+            },
+            "clientDTO": {
+              "title": "Смета на электромонтажные работы",
+              "number": "e3880488",
+              "version": 1,
+              "date": "2026-10-18",
+              "object": "Демо · квартира 36 м²",
+              "address": "Учебный объект — цены условные",
+              "client": "Пример для проверки",
+              "clientPhone": "",
+              "executor": "",
+              "executorPhone": "",
+              "area": null,
+              "note": "",
+              "disclaimer": "Коммерческий расчёт. Электротехнические решения требуют проверки",
+              "rows": [
+                {
+                  "name": "Отверстие и монтаж подрозетника",
+                  "quantity": 3,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Прокладка кабеля",
+                  "quantity": 1.5,
+                  "unit": "м"
+                },
+                {
+                  "name": "Монтаж розетки / выключателя",
+                  "quantity": 3,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Сборка и монтаж щита",
+                  "quantity": 1,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Подключение линии в щите",
+                  "quantity": 1,
+                  "unit": "линия"
+                },
+                {
+                  "name": "Проверка и запуск",
+                  "quantity": 1,
+                  "unit": "объект"
+                },
+                {
+                  "name": "Кабель — уточнить марку",
+                  "quantity": 1.6,
+                  "unit": "м"
+                },
+                {
+                  "name": "Крепление",
+                  "quantity": 5,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Метиз",
+                  "quantity": 10,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Подрозетник",
+                  "quantity": 3,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Механизм розетки / выключателя",
+                  "quantity": 3,
+                  "unit": "шт."
+                },
+                {
+                  "name": "Автомат (ручной пример)",
+                  "quantity": 1,
+                  "unit": "шт."
+                }
+              ],
+              "totalKopecks": 1036200
+            }
+          }
+        ],
+        "createdAt": "2026-10-18T02:24:33.142Z",
+        "updatedAt": "2026-10-18T02:24:33.892Z"
+      }
+    ],
+    "catalogs": {
+      "appliances": [],
+      "materials": [
+        {
+          "id": "cable",
+          "name": "Кабель — уточнить марку",
+          "category": "cable",
+          "unit": "м",
+          "price": null
+        },
+        {
+          "id": "conduit",
+          "name": "Гофра — уточнить тип",
+          "category": "conduit",
+          "unit": "м",
+          "price": null
+        },
+        {
+          "id": "box",
+          "name": "Подрозетник",
+          "category": "box",
+          "unit": "шт.",
+          "price": null
+        },
+        {
+          "id": "mechanism",
+          "name": "Механизм розетки / выключателя",
+          "category": "mechanism",
+          "unit": "шт.",
+          "price": null
+        },
+        {
+          "id": "mount",
+          "name": "Крепление",
+          "category": "mount",
+          "unit": "шт.",
+          "price": null
+        },
+        {
+          "id": "hardware",
+          "name": "Метиз",
+          "category": "hardware",
+          "unit": "шт.",
+          "price": null
+        },
+        {
+          "id": "primer",
+          "name": "Грунтовка",
+          "category": "primer",
+          "unit": "л",
+          "price": null,
+          "rate": null,
+          "layers": 1
+        },
+        {
+          "id": "filler",
+          "name": "Смесь для заделки",
+          "category": "filler",
+          "unit": "кг",
+          "price": null,
+          "rate": null,
+          "packageSize": null
+        }
+      ]
+    },
+    "prices": [
+      {
+        "id": "demolition",
+        "name": "Демонтаж",
+        "unit": "шт.",
+        "price": null
+      },
+      {
+        "id": "chase",
+        "name": "Штробление",
+        "unit": "м",
+        "price": null
+      },
+      {
+        "id": "box",
+        "name": "Отверстие и монтаж подрозетника",
+        "unit": "шт.",
+        "price": null
+      },
+      {
+        "id": "cable",
+        "name": "Прокладка кабеля",
+        "unit": "м",
+        "price": null
+      },
+      {
+        "id": "mechanism",
+        "name": "Монтаж розетки / выключателя",
+        "unit": "шт.",
+        "price": null
+      },
+      {
+        "id": "light",
+        "name": "Монтаж точки освещения",
+        "unit": "шт.",
+        "price": null
+      },
+      {
+        "id": "panel",
+        "name": "Сборка и монтаж щита",
+        "unit": "шт.",
+        "price": null
+      },
+      {
+        "id": "circuit",
+        "name": "Подключение линии в щите",
+        "unit": "линия",
+        "price": null
+      },
+      {
+        "id": "testing",
+        "name": "Проверка и запуск",
+        "unit": "объект",
+        "price": null
+      },
+      {
+        "id": "fill",
+        "name": "Заделка штроб",
+        "unit": "м",
+        "price": null
+      }
+    ],
+    "settings": {
+      "executor": "",
+      "phone": "",
+      "logo": null,
+      "lastBackupAt": null
+    }
+  }
+}
