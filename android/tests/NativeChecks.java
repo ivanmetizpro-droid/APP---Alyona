@@ -39,7 +39,7 @@ public final class NativeChecks extends Instrumentation {
   js("window.__result=null;document.querySelector('[data-act=backup]').click();true");clickSystem("Save","action_menu_save");until("window.__result","\"saved\"",30);check(true,"native JSON backup saved through SAF");
   js("window.__result=null;document.querySelector('[data-act=import]').click();true");Thread.sleep(2000);back();until("window.__result","\"cancel\"",30);check(true,"native JSON import cancel leaves project intact");
   js("document.querySelector('[data-act=import]').click();true");String backupName=(String)new JSONTokener(js("'elektrosmeta-backup-'+new Date().toISOString().slice(0,10)+'.json'")).nextValue();clickSystem(backupName);until("Boolean(document.querySelector('dialog[open]'))","true",30);js("document.querySelector('dialog form').requestSubmit();true");until("Boolean(document.querySelector('[data-act=open]'))","true",30);check(true,"native JSON import restored validated state");
-  js("window.handleNativeBack();true");check(true,"native Back handler executes");
+  js("document.querySelector('[data-act=open]').click();true");until("Boolean(document.querySelector('[data-field=title]'))","true",30);back();until("Boolean(document.querySelector('[data-act=new]'))","true",30);check(true,"native Back navigates from project to objects");
   output.putString("stream",report.toString());finish(Activity.RESULT_OK,output);
  }catch(Throwable e){output.putString("stream",report+"FAIL: "+e.toString()+"\n");finish(Activity.RESULT_CANCELED,output);}}
 }
